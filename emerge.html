@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>IN / New York — Plans Emerge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090909;--panel:#121212;--line:#252525;--muted:#aaa;--cream:#f2e5cf;--soft:#171717;--green:#66d17a;--white:#f7f5f1}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}
+.shell{max-width:1180px;margin:0 auto;padding:24px}
+.top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:8px 0 22px;margin-bottom:28px}.brand{font-family:'Playfair Display',serif;font-size:44px;line-height:.8}.brand small{display:block;font-family:'DM Sans';font-size:10px;letter-spacing:.28em;margin-top:12px}.demo{font-size:12px;color:#aaa;border:1px solid var(--line);padding:8px 12px;border-radius:999px}.back{font-size:13px;color:#bbb}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-bottom:24px}.heroCard,.card{border:1px solid var(--line);background:linear-gradient(180deg,#171717,#101010);border-radius:26px;overflow:hidden}.heroCard{padding:34px;min-height:330px;position:relative}.eyebrow{font-size:11px;letter-spacing:.18em;color:#c8b08a;text-transform:uppercase}.hero h1{font-family:'Playfair Display',serif;font-size:58px;line-height:.98;margin:14px 0 16px;max-width:650px}.hero p{color:#bbb;font-size:17px;line-height:1.55;max-width:620px}.coffee{background:radial-gradient(circle at 75% 25%,rgba(210,170,110,.20),transparent 32%),linear-gradient(145deg,#17110e,#0f0f0f);padding:28px}.coffee h3{font-family:'Playfair Display';font-size:32px;margin:8px 0}.coffee .order{margin-top:90px;color:#ddd}.pillRow{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.pill{border:1px solid #3b342d;background:#17130f;padding:10px 14px;border-radius:999px;font-size:13px;color:#e8dfd2;cursor:pointer}.pill.on{background:var(--cream);color:#111;border-color:var(--cream)}
+.section{margin:30px 0}.sectionHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:13px}.sectionHead h2{font-family:'Playfair Display';font-size:32px;margin:0}.sectionHead span{color:#888;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{padding:20px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.tag{font-size:10px;letter-spacing:.14em;color:#bda98a;text-transform:uppercase}.card h3{font-family:'Playfair Display';font-size:26px;margin:10px 0 6px}.card p{color:#aaa;line-height:1.45;margin:0}.people{display:flex;align-items:center;gap:7px;margin-top:15px}.avatar{width:31px;height:31px;border-radius:50%;background:#2c2c2c;border:1px solid #444;display:grid;place-items:center;font-size:11px}.small{font-size:12px;color:#999}.actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}.btn{border:none;border-radius:12px;padding:11px 14px;font-weight:600;cursor:pointer;background:#262626;color:white}.btn.primary{background:var(--cream);color:#111}.btn.ghost{border:1px solid #333;background:#161616}.signal{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:17px 18px;border:1px solid var(--line);border-radius:18px;background:#111;margin-top:12px}.signal strong{display:block}.signal em{color:#999;font-style:normal;font-size:13px}.signal .state{font-size:12px;color:var(--green)}
+.magic{border:1px solid #3b342d;background:radial-gradient(circle at 50% 0,rgba(234,203,151,.13),transparent 40%),#111;border-radius:28px;padding:28px}.magic h2{font-family:'Playfair Display';font-size:38px;margin:5px 0 8px}.magic .line{font-size:17px;color:#ccc}.match{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;border-top:1px solid #2a2a2a;margin-top:20px;padding-top:20px}.matchTitle{font-size:20px;font-weight:700}.statusRow{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}.status{font-size:13px;color:#bbb}.status b{color:#fff}.changed{margin-top:30px;padding:24px;border-radius:22px;border:1px solid var(--line);background:#101010}.changed h3{font-family:'Playfair Display';font-size:30px;margin:0 0 6px}.toast{position:fixed;right:24px;bottom:24px;background:#f1e3cb;color:#111;padding:14px 18px;border-radius:14px;font-weight:700;opacity:0;transform:translateY(10px);transition:.25s}.toast.show{opacity:1;transform:none}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero h1{font-size:44px}.shell{padding:16px}.brand{font-size:38px}.coffee .order{margin-top:30px}.match{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top">
+    <div class="brand">IN<small>NEW YORK</small></div>
+    <div style="display:flex;gap:12px;align-items:center"><span class="demo">PLAYGROUND · DEMO DATA</span><a class="back" href="index.html">← Loved dashboard</a></div>
+  </div>
+
+  <div class="hero">
+    <section class="heroCard">
+      <div class="eyebrow">Saturday · 11:24 AM</div>
+      <h1>Grant, keep the day open.</h1>
+      <p>You don’t need a plan yet. See what catches your eye, let people know you’re around, and let the night take shape.</p>
+      <div class="pillRow">
+        <button class="pill on" onclick="toggle(this)">I’m around today</button>
+        <button class="pill" onclick="toggle(this)">Dinner</button>
+        <button class="pill" onclick="toggle(this)">Sports</button>
+        <button class="pill" onclick="toggle(this)">Something different</button>
+        <button class="pill" onclick="toggle(this)">Keep me posted</button>
+      </div>
+    </section>
+    <section class="heroCard coffee">
+      <div class="eyebrow">RIGHT NOW</div>
+      <h3>Rosetta Bakery</h3>
+      <p>Near home. Easy start. No need to know what comes next.</p>
+      <div class="order"><b>Your usual</b><br><span class="small">Iced latte · regular milk</span></div>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="sectionHead"><h2>Stuff you might actually do</h2><span>No commitment.</span></div>
+    <div class="grid">
+      <article class="card">
+        <div><div class="tag">SPORTS · TONIGHT</div><h3>Yankees vs. Red Sox</h3><p>7:05 PM. Enough time to decide later.</p><div class="people"><span class="avatar">M</span><span class="avatar">F</span><span class="small">Mikey + Falconi are interested</span></div></div>
+        <div class="actions"><button class="btn primary" onclick="interest(this)">I’d be into this</button><button class="btn ghost" onclick="interest(this)">Who’s IN?</button></div>
+      </article>
+      <article class="card">
+        <div><div class="tag">DINNER · DOWNTOWN</div><h3>Cecchi’s</h3><p>Lively, polished, good crowd. Feels like somewhere you could land later without overthinking it.</p><div class="people"><span class="avatar">S</span><span class="avatar">J</span><span class="small">3 people you know saved this</span></div></div>
+        <div class="actions"><button class="btn primary" onclick="interest(this)">Maybe</button><button class="btn ghost" onclick="interest(this)">Keep me posted</button></div>
+      </article>
+      <article class="card">
+        <div><div class="tag">LIVE · TONIGHT</div><h3>Country show downtown</h3><p>Not something you planned for. Could become the night if the right people are down.</p></div>
+        <div class="actions"><button class="btn primary" onclick="interest(this)">I’d go</button><button class="btn ghost" onclick="interest(this)">Send to Mikey</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead"><h2>People are loosely around</h2><span>Nobody’s committing to shit.</span></div>
+    <div class="signal"><div><strong>Mikey</strong><em> Around tonight · probably wants something fun</em></div><span class="state">AROUND</span></div>
+    <div class="signal"><div><strong>Falconi</strong><em> Could be convinced · sports / dinner</em></div><span class="state">MAYBE</span></div>
+    <div class="signal"><div><strong>Sarah</strong><em> Thinking downtown later</em></div><span class="state">KEEP ME POSTED</span></div>
+  </section>
+
+  <section class="magic">
+    <div class="eyebrow">IN NOTICED SOMETHING</div>
+    <h2>This could be a move.</h2>
+    <div class="line">You, Mikey and Falconi all showed interest in Yankees tonight.</div>
+    <div class="match">
+      <div>
+        <div class="matchTitle">Yankees vs. Red Sox · 7:05 PM</div>
+        <div class="statusRow"><span class="status"><b>Mikey</b> · I’m IN</span><span class="status"><b>Falconi</b> · maybe</span><span class="status"><b>You</b> · interested</span></div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="spark()">See if they’re down</button><button class="btn ghost" onclick="interest(this)">Keep it open</button></div>
+    </div>
+  </section>
+
+  <section class="changed">
+    <div class="eyebrow">6:13 PM</div>
+    <h3>Plans changed?</h3>
+    <p style="color:#aaa;max-width:680px">No dramatic announcement. Just reopen the night and see what else is already moving.</p>
+    <div class="grid" style="margin-top:18px">
+      <article class="card"><div><div class="tag">OPENING</div><h3>Comedy downtown</h3><p>Sarah + Matt are going. Room for a couple more.</p></div><button class="btn primary" onclick="interest(this)">Want IN?</button></article>
+      <article class="card"><div><div class="tag">DINNER</div><h3>Acme · 8:30</h3><p>You saved this before. Two other people are interested.</p></div><button class="btn primary" onclick="interest(this)">Keep me posted</button></article>
+      <article class="card"><div><div class="tag">SOCIAL</div><h3>Mikey is still around.</h3><p>His plans never really formed either.</p></div><button class="btn primary" onclick="interest(this)">Ping Mikey</button></article>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast">Signal saved — still no commitment 😂</div>
+<script>
+function pop(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function toggle(el){el.classList.toggle('on');pop(el.classList.contains('on')?'You’re on the radar.':'Still keeping it open.');}
+function interest(el){pop(el.textContent.includes('IN?')?'You’re in the loop.':'Signal saved — still no commitment 😂');}
+function spark(){pop('Mikey and Falconi got a “you down?” nudge.');}
+</script>
+</body>
+</html>
