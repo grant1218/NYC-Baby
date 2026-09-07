@@ -80,18 +80,20 @@ async function runBatch(run, agents){
   }
 
   const roster = agents.map(a => `${a.id} | ${a.mission}`).join('\n');
-  const prompt = `You are a batch of independent possibility scouts working for ${run.member}.\nGoal/context: ${run.goal}\n\nEach scout must independently produce ONE concrete possibility. Do not merely restate its lane. Favor specific, useful, surprising next moves. Avoid duplicates within this batch.\n\nScout roster:\n${roster}\n\nReturn ONLY valid JSON in this exact shape: {"options":[{"agentId":"A001","title":"...","why":"...","move":"...","score":0-100,"confidence":"low|medium|high"}]}. Include exactly one option per scout.`;
+  const prompt = `You are a batch of independent possibility scouts working for ${run.member}.\nGoal/context: ${run.goal}\nCurrent UTC time: ${now()}\n\nUse web search whenever current information materially improves the result. Each scout must independently produce ONE concrete possibility. Favor things that are real, current, specific, useful, and surprising. Avoid duplicates within this batch. When a possibility depends on an event, place, opening, announcement, availability, trend, or other time-sensitive fact, verify it with web search first.\n\nScout roster:\n${roster}\n\nReturn ONLY valid JSON in this exact shape: {"options":[{"agentId":"A001","title":"...","why":"...","move":"...","score":0-100,"confidence":"low|medium|high"}]}. Include exactly one option per scout.`;
 
   try {
+    const body = {
+      model: process.env.AGENT_SCOUT_MODEL || 'gpt-5.6-luna',
+      input: prompt,
+      tools: [{type:'web_search_preview'}],
+      reasoning:{effort:'low'},
+      max_output_tokens: 6000
+    };
     const r = await fetch('https://api.openai.com/v1/responses', {
       method:'POST',
       headers:{'Authorization':`Bearer ${key}`,'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model: process.env.AGENT_SCOUT_MODEL || 'gpt-5.6-luna',
-        input: prompt,
-        reasoning:{effort:'low'},
-        max_output_tokens: 6000
-      })
+      body:JSON.stringify(body)
     });
     if(!r.ok) throw new Error(`OpenAI ${r.status}: ${await r.text()}`);
     const data = await r.json();
@@ -130,7 +132,13 @@ async function synthesize(run){
     const compact = sorted.slice(0,80).map(x=>({title:x.title,why:x.why,move:x.move,score:x.score}));
     const r = await fetch('https://api.openai.com/v1/responses',{
       method:'POST',headers:{'Authorization':`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},
-      body:JSON.stringify({model:process.env.AGENT_JUDGE_MODEL || 'gpt-5.6-terra',reasoning:{effort:'medium'},max_output_tokens:5000,input:`You are the final judge for Mikey's possibility engine. Goal: ${run.goal}. Here are the strongest scout outputs: ${JSON.stringify(compact)}. Return ONLY JSON {"summary":"2 sentence synthesis","top":[{"title":"...","why":"...","move":"...","score":0-100}]}. Select 12 genuinely distinct, actionable possibilities.`})
+      body:JSON.stringify({
+        model:process.env.AGENT_JUDGE_MODEL || 'gpt-5.6-terra',
+        tools:[{type:'web_search_preview'}],
+        reasoning:{effort:'medium'},
+        max_output_tokens:5000,
+        input:`You are the final judge for Mikey's possibility engine. Goal: ${run.goal}. Current UTC time: ${now()}. Here are the strongest scout outputs: ${JSON.stringify(compact)}. Verify any time-sensitive finalist with web search if needed. Return ONLY JSON {"summary":"2 sentence synthesis","top":[{"title":"...","why":"...","move":"...","score":0-100}]}. Select 12 genuinely distinct, actionable possibilities.`
+      })
     });
     if(r.ok){
       const p=parseJson(outputText(await r.json()));
@@ -162,7 +170,7 @@ function createRun(member='mikey', goal='Find the best possibilities worth carin
 
 function publicRun(run, includeResults=false){
   if(!run) return null;
-  const x={id:run.id,member:run.member,goal:run.goal,status:run.status,total:run.total,completed:run.completed,aiCompleted:run.aiCompleted,fallback:run.fallback,working:run.working,modelConfigured:!!process.env.OPENAI_API_KEY,createdAt:run.createdAt,startedAt:run.startedAt,finishedAt:run.finishedAt,updatedAt:run.updatedAt,summary:run.summary,top:run.top,errors:run.errors.slice(-3)};
+  const x={id:run.id,member:run.member,goal:run.goal,status:run.status,total:run.total,completed:run.completed,aiCompleted:run.aiCompleted,fallback:run.fallback,working:run.working,modelConfigured:!!process.env.OPENAI_API_KEY,webSearchEnabled:!!process.env.OPENAI_API_KEY,createdAt:run.createdAt,startedAt:run.startedAt,finishedAt:run.finishedAt,updatedAt:run.updatedAt,summary:run.summary,top:run.top,errors:run.errors.slice(-3)};
   if(includeResults) x.results=run.results;
   return x;
 }
@@ -174,7 +182,7 @@ function latestFor(member='mikey'){
 function registerAgentRoutes(app){
   app.get('/api/agents/status',(req,res)=>{
     const run=req.query.runId?RUNS.get(String(req.query.runId)):latestFor(req.query.member||'mikey');
-    if(!run) return res.json({status:'idle',member:normalize(req.query.member||'mikey'),total:TOTAL_AGENTS,modelConfigured:!!process.env.OPENAI_API_KEY});
+    if(!run) return res.json({status:'idle',member:normalize(req.query.member||'mikey'),total:TOTAL_AGENTS,modelConfigured:!!process.env.OPENAI_API_KEY,webSearchEnabled:!!process.env.OPENAI_API_KEY});
     res.json(publicRun(run,false));
   });
   app.get('/api/agents/results',(req,res)=>{
