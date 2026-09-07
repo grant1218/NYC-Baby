@@ -8,7 +8,7 @@ app.use(cors());
 
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 const members = ['grant','mikey','falconi','stuart','marney'];
-const state = { signals: [], invites: [], paidMembers: [] };
+const state = { signals: [], invites: [], paidMembers: [], activity: [] };
 
 function normalize(x){ return String(x || '').trim().toLowerCase(); }
 function overlaps(){
@@ -76,7 +76,22 @@ app.post('/api/invite',(req,res) => {
   const rec={id:Date.now()+'-'+Math.random().toString(36).slice(2,7),from,to,item,status:'open',createdAt:new Date().toISOString()};
   state.invites.push(rec); res.json({ok:true,invite:rec});
 });
-app.post('/api/reset',(req,res) => { state.signals.length=0; state.invites.length=0; res.json({ok:true}); });
+app.post('/api/activity',(req,res) => {
+  const member=normalize(req.body.member), event=normalize(req.body.event), detail=String(req.body.detail||''), sessionId=String(req.body.sessionId||'').slice(0,120);
+  if(!member||!event) return res.status(400).json({error:'member and event required'});
+  const rec={id:Date.now()+'-'+Math.random().toString(36).slice(2,7),member,event,detail,sessionId,createdAt:new Date().toISOString()};
+  state.activity.push(rec);
+  if(state.activity.length>1000) state.activity.splice(0,state.activity.length-1000);
+  console.log('ACTIVITY',JSON.stringify(rec));
+  res.json({ok:true,activity:rec});
+});
+app.get('/api/activity',(req,res) => {
+  const member=normalize(req.query.member||'mikey');
+  const rows=state.activity.filter(x=>x.member===member).slice(-200).reverse();
+  const sessions=[...new Set(rows.map(x=>x.sessionId).filter(Boolean))];
+  res.json({member,count:rows.length,sessions:sessions.length,lastActive:rows[0]?.createdAt||null,activity:rows});
+});
+app.post('/api/reset',(req,res) => { state.signals.length=0; state.invites.length=0; state.activity.length=0; res.json({ok:true}); });
 
 registerAgentRoutes(app);
 
