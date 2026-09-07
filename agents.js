@@ -1,0 +1,9 @@
+/* IN Scout Swarm v0.1 — server-side orchestration contract.
+   Provider adapters intentionally remain external: never expose provider keys in the browser. */
+const SCOUTS=[
+['pulse','What is unusually alive in this city right now?'],['nightlife','Find credible nightlife openings with energy.'],['dining','Find dinner openings that can become a night.'],['sports','Find sports moments Mikey would care about.'],['music','Find live music, DJs and one-night performances.'],['culture','Find non-tourist cultural openings.'],['underground','Find independent/offbeat experiences from public sources.'],['tickets','Validate ticketed opportunities and urgency.'],['neighborhood','Assess neighborhood energy and adjacency.'],['social','Match only permissioned IN member signals and mutuals.'],['intro','Find mutual opt-in introduction opportunities inside IN.'],['friction','Estimate travel/time/logistics friction.'],['fit','Score against Mikey behavior: sports, social energy, spontaneity, great rooms.'],['quality','Cross-check claims, dates and source quality.'],['editor','Collapse the swarm into at most three actionable openings.']
+];
+function buildJobs(ctx){return SCOUTS.map(([id,mission])=>({id,mission,context:{city:ctx.city,when:ctx.when||'tonight',signal:ctx.signal||'AROUND',memberProfile:ctx.memberProfile||{},permissionedSocial:ctx.permissionedSocial||[]}}))}
+function rank(candidates=[]){return candidates.filter(x=>x&&x.verified!==false).map(x=>({...x,score:(x.fit||0)*.35+(x.social||0)*.25+(x.special||0)*.2+(x.feasible||0)*.2})).sort((a,b)=>b.score-a.score).slice(0,3)}
+function synthesize(results=[]){const candidates=results.flatMap(x=>x.candidates||[]);return rank(candidates)}
+module.exports={SCOUTS,buildJobs,rank,synthesize};
