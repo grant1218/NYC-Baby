@@ -1,1 +1,1 @@
-{"name":"in-nyc","version":"0.1.0","private":true,"type":"commonjs","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.21.2","cors":"^2.8.5"}}
+{"name":"in-nyc","version":"0.2.0","private":true,"type":"commonjs","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.21.2","cors":"^2.8.5","stripe":"^18.5.0"}}
