@@ -1,60 +1,59 @@
-/* NYC Baby city intelligence — factual public-source leads, summarized in NYC Baby's own voice. */
+/* NYC Baby city intelligence — factual public-source leads, summarized in NYC Baby's own voice. No third-party reviews are reproduced. */
 window.NYCBABY_CITY = {
   updated: '2026-09-06',
   restaurants: [
-    {name:'Faux', area:'Tribeca', kind:'French', why:'New opening · bi-level restaurant + late-night energy', source:'The Infatuation · New Openings'},
-    {name:"Wu’s Dynasty", area:'Upper West Side', kind:'Chinese', why:'Just added · 210 W 70th St', source:'The Infatuation · New Openings'},
-    {name:'20 Blocks', area:'East Village', kind:'Sandwiches', why:'New Hit List pick · lunch, brunch, coffee', source:'The Infatuation · Hit List'},
-    {name:'Frenzie', area:'Brooklyn Heights', kind:'Pizza', why:'Walk-in-only · casual dinner or date', source:'The Infatuation · Hit List'},
-    {name:'Cospa Ramen', area:'NoMad', kind:'Japanese', why:'Late-night ramen · open daily until 2am or sellout', source:'The Infatuation · Hit List'},
-    {name:'Keepers', area:'West Village', kind:'Pizza + Bar', why:'New West Village spot · good for eating at the bar', source:'The Infatuation · Hit List'},
-    {name:'Lala Hot Chicken', area:'Chelsea', kind:'Fried Chicken', why:'Casual · solo-friendly · inexpensive', source:'The Infatuation · Hit List'},
-    {name:'Hungry Spicy', area:'Chelsea', kind:'Thai', why:'New Chelsea opening · strong group-dinner energy', source:'The Infatuation · Hit List'},
-    {name:'Burmese Bites', area:'Astoria', kind:'Burmese', why:'Casual, group-friendly and under-the-radar', source:'The Infatuation · Hit List'},
-    {name:'Zig Zag Oyster Bar', area:'Prospect Heights', kind:'Raw Bar', why:'Walk-in-only · easy bar-seat plan', source:'The Infatuation · Hit List'},
-    {name:'Graciela', area:'West Village', kind:'Argentinian', why:'Date night · parents in town · special occasion', source:'The Infatuation · Hit List'},
-    {name:'Prosciutto', area:'East Village', kind:'Italian', why:'Eight tables · walk-in · solo-friendly', source:'The Infatuation · Hit List'},
-    {name:'Bark Barbecue', area:'Bushwick', kind:'BBQ', why:'Dominican-Texan barbecue · great for groups', source:'The Infatuation · Hit List'},
-    {name:'Phê', area:'Chinatown', kind:'Vietnamese', why:'Calm daytime stop · coffee + solo-friendly', source:'The Infatuation · Hit List'},
-    {name:'Consuelo', area:'Upper West Side', kind:'Mexican', why:'New UWS follow-up · date, brunch or solo dinner', source:'The Infatuation · Hit List'},
-    {name:'Titán', area:'DUMBO', kind:'Mexican', why:'Big backyard · easy group plan', source:'The Infatuation · Hit List'},
-    {name:'Oriana', area:'Nolita', kind:'American', why:'Polished · groups, occasions and team dinners', source:'The Infatuation · Hit List'}
+    {name:'20 Blocks',area:'East Village',kind:'Sandwiches',why:'New Hit List pick · lunch, brunch, coffee',moods:['SOLO','DAYTIME','VISITOR'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Frenzie',area:'Brooklyn Heights',kind:'Pizza',why:'Walk-in-only · casual dinner · late-night option',moods:['DATE','GROUP','AFTER WORK'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Cospa Ramen',area:'NoMad',kind:'Japanese',why:'Affordable ramen · open late · easy solo stop',moods:['SOLO','AFTER WORK','LATE'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Keepers',area:'West Village',kind:'Pizza + Bar',why:'Bar seats · pizza · easy spontaneous night',moods:['DATE','AFTER WORK','SOCIAL'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Lala Hot Chicken',area:'Chelsea',kind:'Fried Chicken',why:'Casual · solo-friendly · inexpensive',moods:['SOLO','CASUAL','AFTER WORK'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Masani',area:'Forest Hills',kind:'Pizza',why:'Casual neighborhood pizza · good low-pressure group plan',moods:['CASUAL','GROUP','FAMILY'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:"Sam Ping's BBQ",area:'Financial District',kind:'Chinese BBQ',why:'Fast inexpensive lunch · useful workday stop',moods:['SOLO','DAYTIME','WORKDAY'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Hungry Spicy',area:'Chelsea',kind:'Thai',why:'Big-group energy · memorable dinner plan',moods:['GROUP','SOCIAL','VISITOR'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Burmese Bites',area:'Astoria',kind:'Burmese',why:'Casual · group-friendly · good for out-of-towners',moods:['GROUP','VISITOR','DATE'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Zig Zag Oyster Bar',area:'Prospect Heights',kind:'Raw Bar',why:'Walk-in-only · bar seating · spontaneous date or social stop',moods:['DATE','SOLO','AFTER WORK'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Graciela',area:'West Village',kind:'Argentinian',why:'Date night · parents in town · special occasion',moods:['DATE','VISITOR','SPECIAL'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Prosciutto',area:'East Village',kind:'Italian',why:'Small room · walk-in energy · easy solo dinner',moods:['SOLO','DATE','AFTER WORK'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Bark Barbecue',area:'Bushwick',kind:'BBQ',why:'Dominican-Texan barbecue · built for sharing',moods:['GROUP','VISITOR','WEEKEND'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Phê',area:'Chinatown',kind:'Vietnamese',why:'Calm daytime stop · coffee · easy alone',moods:['SOLO','DAYTIME','VISITOR'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Consuelo',area:'Upper West Side',kind:'Mexican',why:'Neighborhood option · brunch, date or solo dinner',moods:['DATE','SOLO','NEIGHBORHOOD'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Titán',area:'DUMBO',kind:'Mexican',why:'Big backyard · easy group plan',moods:['GROUP','VISITOR','WEEKEND'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Oriana',area:'Nolita',kind:'American',why:'Polished · groups, occasions and team dinners',moods:['GROUP','SPECIAL','WORK'],source:'The Infatuation · Hit List',url:'https://www.theinfatuation.com/new-york/guides/best-new-new-york-restaurants-hit-list'},
+    {name:'Faux',area:'Tribeca',kind:'French',why:'New opening · dinner + late-night energy',moods:['DATE','LATE','AFTER WORK'],source:'The Infatuation · New Openings',url:'https://www.theinfatuation.com/new-york/guides/new-nyc-restaurants-openings'},
+    {name:"Wu’s Dynasty",area:'Upper West Side',kind:'Chinese',why:'New neighborhood opening · useful for UWS members',moods:['NEIGHBORHOOD','GROUP','FAMILY'],source:'The Infatuation · New Openings',url:'https://www.theinfatuation.com/new-york/guides/new-nyc-restaurants-openings'}
   ],
   activities: [
-    {date:'SEP 8', name:'Appleton Organ Performance', area:'The Met', why:'Free with museum admission · 1 PM', tag:'CULTURE'},
-    {date:'SEP 8', name:'Japanese Ceramics Expert Talk', area:'The Met', why:'Gallery deep dive · 3 PM · free with admission', tag:'CULTURE'},
-    {date:'SEP 9', name:'Willow Leaf Tray Weaving', area:'The Met Cloisters', why:'Hands-on workshop · 10 AM', tag:'MAKE SOMETHING'},
-    {date:'SEP 11', name:'Date Night at The Met', area:'Upper East Side', why:'Live music + art · 5 PM · come solo or bring someone', tag:'SOCIAL'},
-    {date:'SEP 11', name:'Yankees vs. Mets', area:'Yankee Stadium', why:'Subway Series + September 11 tribute · 7:05 PM', tag:'SPORTS'},
-    {date:'SEP 12', name:'Date Night at The Met', area:'Upper East Side', why:'Live music + art · 5 PM', tag:'SOCIAL'},
-    {date:'SEP 18', name:'Date Night at The Met', area:'Upper East Side', why:'Easy Friday plan · live music + art', tag:'SOCIAL'},
-    {date:'SEP 19', name:'Date Night at The Met', area:'Upper East Side', why:'Saturday evening plan · 5 PM', tag:'SOCIAL'},
-    {date:'SEP 21', name:'Chuseok Celebration', area:'City Hall', why:'Public cultural celebration · 5:30 PM', tag:'COMMUNITY'},
-    {date:'SEP 22', name:'Climate Week at City Hall', area:'City Hall', why:'Civic + climate community · 5:30 PM', tag:'CAUSES'},
-    {date:'SEP 25', name:'Date Night at The Met', area:'Upper East Side', why:'Friday culture plan · 5 PM', tag:'SOCIAL'},
-    {date:'SEP 26', name:'Date Night at The Met', area:'Upper East Side', why:'Saturday culture plan · 5 PM', tag:'SOCIAL'}
+    {date:'SEP 7',name:'Whitney Biennial Tour',area:'Whitney Museum',why:'1 PM · easy solo culture plan',tag:'CULTURE',moods:['SOLO','VISITOR','DAYTIME'],url:'https://whitney.org/events'},
+    {date:'SEP 7',name:'A Closer Look',area:'Whitney Museum',why:'12 PM · guided close-looking through dialogue',tag:'SOCIAL CULTURE',moods:['SOLO','SOCIAL','DAYTIME'],url:'https://whitney.org/events'},
+    {date:'SEP 9',name:'The Art of Minnie Evans: A Conversation',area:'Whitney Museum',why:'5:30–7 PM · talks + readings',tag:'AFTER WORK',moods:['SOLO','AFTER WORK','CULTURE'],url:'https://whitney.org/events'},
+    {date:'SEP 9',name:'Whitney Biennial Tour',area:'Whitney Museum',why:'1 PM · plug a visitor into the city while you work',tag:'GUEST-FRIENDLY',moods:['VISITOR','DAYTIME','SOLO'],url:'https://whitney.org/events'},
+    {date:'SEP 11',name:'Free Friday Nights',area:'Whitney Museum',why:'5–10 PM · high-value social/culture plan',tag:'COME SOLO',moods:['SOLO','SOCIAL','NO DRINKS'],url:'https://whitney.org/events'},
+    {date:'SEP 11',name:'Date Night at The Met',area:'Upper East Side',why:'Live music + art · 5 PM · come solo or bring someone',tag:'SOCIAL',moods:['DATE','SOLO','CULTURE'],url:'https://www.metmuseum.org/events'},
+    {date:'SEP 13',name:'Free Second Sunday',area:'Whitney Museum',why:'10:30 AM–6 PM · easy Sunday plan',tag:'FREE',moods:['SOLO','VISITOR','WEEKEND'],url:'https://whitney.org/events'},
+    {date:'SEP 18',name:'Whitney Free Friday + Ailey',area:'Whitney Museum',why:'Free dance classes + DJ + art · 5–10 PM',tag:'SOCIAL',moods:['SOLO','SOCIAL','ACTIVE'],url:'https://whitney.org/events'},
+    {date:'SEP 18',name:'Date Night at The Met',area:'Upper East Side',why:'Friday culture plan · live music + art',tag:'SOCIAL',moods:['DATE','SOLO','CULTURE'],url:'https://www.metmuseum.org/events'},
+    {date:'SEP 21',name:'Chuseok Celebration',area:'City Hall',why:'Public cultural celebration · 5:30 PM',tag:'COMMUNITY',moods:['SOCIAL','COMMUNITY','CULTURE'],url:'https://www.nyc.gov/'},
+    {date:'SEP 22',name:'Climate Week at City Hall',area:'City Hall',why:'Civic + climate community · 5:30 PM',tag:'CAUSES',moods:['CAUSES','SOCIAL','AFTER WORK'],url:'https://www.nyc.gov/'},
+    {date:'SEP 25',name:'Free Friday Nights',area:'Whitney Museum',why:'5–10 PM · art + people + a reason to leave home',tag:'COME SOLO',moods:['SOLO','SOCIAL','NO DRINKS'],url:'https://whitney.org/events'},
+    {date:'SEP 25',name:'Date Night at The Met',area:'Upper East Side',why:'Friday culture plan · 5 PM',tag:'SOCIAL',moods:['DATE','SOLO','CULTURE'],url:'https://www.metmuseum.org/events'}
   ]
 };
 
 (function(){
-  function esc(s){return String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));}
-  function openCityHub(type){
-    const data=window.NYCBABY_CITY[type]||[];
-    let modal=document.getElementById('cityHubModal');
-    if(!modal){modal=document.createElement('div');modal.id='cityHubModal';modal.className='modal';modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open')};document.body.appendChild(modal)}
-    const title=type==='restaurants'?'New York, eat something new.':'Get out of the apartment.';
-    const sub=type==='restaurants'?'New openings and recent standouts, organized for actual plans—not a giant review dump.':'Things happening in the city that can turn an empty day into a plan. Come solo is normal here.';
-    modal.innerHTML=`<div class="modalCard" style="width:min(760px,94vw);max-height:84vh;overflow:auto"><button class="close" onclick="document.getElementById('cityHubModal').classList.remove('open')">×</button><p class="kicker">${type==='restaurants'?'NYC BABY · RESTAURANT INTELLIGENCE':'NYC BABY · DO SOMETHING'}</p><h3>${title}</h3><p>${sub}</p><div class="access" style="margin-top:18px">${data.map((x,i)=>`<button onclick="show('${type==='restaurants'?'Saved':'Added to your plans'}: ${esc(x.name)}')"><span>${esc(x.name)}</span><small>${esc(x.date||x.area)} · ${esc(x.area||x.kind)} · ${esc(x.why)}</small><b>›</b></button>`).join('')}</div><p style="margin-top:18px;font-size:9px">Updated ${window.NYCBABY_CITY.updated}. Restaurant leads summarized from public Infatuation New Openings/Hit List information; event facts from official/public NYC calendars. NYC Baby adds its own social context.</p></div>`;
-    modal.classList.add('open');
+  const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+  const labels={restaurants:['ALL','SOLO','DATE','GROUP','VISITOR','AFTER WORK'],activities:['ALL','SOLO','SOCIAL','VISITOR','AFTER WORK','NO DRINKS']};
+  let currentType='restaurants',currentFilter='ALL';
+
+  function modal(){let m=document.getElementById('cityHubModal');if(!m){m=document.createElement('div');m.id='cityHubModal';m.className='modal';m.onclick=e=>{if(e.target===m)m.classList.remove('open')};document.body.appendChild(m)}return m}
+  function matches(x){return currentFilter==='ALL'||(x.moods||[]).includes(currentFilter)}
+  function render(){
+    const m=modal(),data=(window.NYCBABY_CITY[currentType]||[]).filter(matches);
+    const isR=currentType==='restaurants';
+    const filters=labels[currentType].map(f=>`<button onclick="window.filterCityHub('${f}')" style="padding:7px 10px;border-radius:999px;border:1px solid #3b4850;background:${f===currentFilter?'#f2f0ea':'#11191e'};color:${f===currentFilter?'#111':'#dbe1e5'};font-size:9px">${f}</button>`).join('');
+    const cards=data.map((x,i)=>`<div style="border:1px solid #2b363d;border-radius:10px;padding:13px;background:#0f171c;margin-bottom:8px"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div style="font-size:8px;letter-spacing:1.3px;color:#8e9aa2">${esc(isR?x.area:x.date+' · '+x.area)}</div><h4 style="margin:5px 0;font-size:15px">${esc(x.name)}</h4><div style="font-size:10px;color:#b9c2c8">${esc(isR?x.kind+' · '+x.why:x.why)}</div></div><span style="font-size:8px;border:1px solid #3a474f;border-radius:999px;padding:5px 7px;white-space:nowrap">${esc(isR?(x.moods||[])[0]||'PLAN':x.tag)}</span></div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:11px"><button class="light" onclick="show('${isR?'Finding someone to join you at':'Finding people for'} ${esc(x.name)}')">${isR?'FIND COMPANY':'WHO\'S GOING?'}</button><button onclick="openButler('${esc(isR?'Build a night around '+x.name:'Build me a plan around '+x.name)}');document.getElementById('cityHubModal').classList.remove('open')">BUILD A PLAN</button><a href="${esc(x.url||'#')}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;text-decoration:none;border:1px solid #4b565d;color:#dbe1e5;border-radius:999px;padding:9px 12px;font-size:9px">SOURCE ↗</a></div></div>`).join('');
+    m.innerHTML=`<div class="modalCard" style="width:min(820px,94vw);max-height:86vh;overflow:auto"><button class="close" onclick="document.getElementById('cityHubModal').classList.remove('open')">×</button><p class="kicker">${isR?'NYC BABY · WHERE SHOULD WE EAT?':'NYC BABY · GET ME OUT OF THE HOUSE'}</p><h3>${isR?'Eat somewhere worth leaving home for.':'Your apartment is not the whole city.'}</h3><p>${isR?'Current openings and standouts become social plans: go alone, bring a guest, or let NYC Baby find you company.':'Culture, community and low-friction plans designed so showing up alone never feels weird.'}</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 18px">${filters}</div>${cards||'<p>No matches yet. NYC Baby will keep looking.</p>'}<p style="margin-top:18px;font-size:9px;line-height:1.5;color:#87949c">Updated ${window.NYCBABY_CITY.updated}. Restaurant facts are summarized from current public Infatuation guides; activity facts from official/public event calendars. NYC Baby does not reproduce third-party reviews—it adds plan, guest and social context.</p></div>`;
+    m.classList.add('open');
   }
-  window.openCityHub=openCityHub;
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.querySelectorAll('.sidebar nav a').forEach(a=>{
-      const t=a.textContent.trim();
-      if(t.includes('Restaurants')) a.onclick=e=>{e.preventDefault();openCityHub('restaurants')};
-      if(t.includes('Activities')) a.onclick=e=>{e.preventDefault();openCityHub('activities')};
-    });
-    const home=document.querySelector('#home');
-    if(home){const b=document.createElement('button');b.className='light';b.textContent='✦ I NEED A PLAN';b.onclick=()=>openCityHub('activities');const actions=home.querySelector('.heroActions');if(actions)actions.prepend(b)}
-  });
+  window.openCityHub=function(type,filter='ALL'){currentType=type;currentFilter=filter;render()};
+  window.filterCityHub=function(filter){currentFilter=filter;render()};
 })();
