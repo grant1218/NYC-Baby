@@ -1,13 +1,14 @@
 /*
- * IN / Mikey FUCK IT brain v0.1
+ * IN / Mikey FUCK IT brain v0.2
  *
- * Founder-labeled decision layer. This converts the first Mikey training
- * sessions into explicit weights, state transitions and learning signals.
- * It does NOT invent live access, crowd, promoter, ride, dating or venue data.
- * Feed only verified/authorized signals into `context`.
+ * Founder-labeled decision layer. This converts Mikey training into explicit
+ * weights, state transitions and learning signals. It does NOT invent live
+ * access, crowd, promoter, ride, dating or venue data. Feed only verified or
+ * explicitly modeled priors into `context` / opportunity features.
  */
 
 const MIKEY_BASE_WEIGHTS = Object.freeze({
+  founderFit: 8,
   socialUpside: 9,
   momentum: 10,
   accessCertainty: 10,
@@ -33,32 +34,32 @@ function clamp(n, min = 0, max = 1) {
 
 function safe(v) { return clamp(v); }
 
-function weightsForContext(context = {}) {
-  const w = { ...MIKEY_BASE_WEIGHTS };
+function weightsForContext(context = {}, learnedWeights = null) {
+  const w = { ...MIKEY_BASE_WEIGHTS, ...(learnedWeights || {}) };
 
   // Founder rule: a failed door changes the objective immediately.
   if (context.doorRejected) {
-    w.accessCertainty = 16;
-    w.momentum = 15;
-    w.proximity = 10;
-    w.novelty = 1;
-    w.decisionBurden = -14;
-    w.doorRisk = -20;
-    w.deadTime = -15;
+    w.accessCertainty = Math.max(w.accessCertainty, 16);
+    w.momentum = Math.max(w.momentum, 15);
+    w.proximity = Math.max(w.proximity, 10);
+    w.novelty = Math.min(w.novelty, 1);
+    w.decisionBurden = Math.min(w.decisionBurden, -14);
+    w.doorRisk = Math.min(w.doorRisk, -20);
+    w.deadTime = Math.min(w.deadTime, -15);
   }
 
   // A dead room should favor a quick credible pivot over theoretical quality.
   if (context.roomDead) {
-    w.momentum = 15;
-    w.energy = 12;
-    w.deadTime = -14;
-    w.proximity = 9;
+    w.momentum = Math.max(w.momentum, 15);
+    w.energy = Math.max(w.energy, 12);
+    w.deadTime = Math.min(w.deadTime, -14);
+    w.proximity = Math.max(w.proximity, 9);
   }
 
   // If Mikey is impaired, simplify. Do not encourage more drinking.
   if (context.impaired) {
-    w.decisionBurden = -18;
-    w.travelFriction = -10;
+    w.decisionBurden = Math.min(w.decisionBurden, -18);
+    w.travelFriction = Math.min(w.travelFriction, -10);
     w.accessCertainty = Math.max(w.accessCertainty, 14);
     w.momentum = Math.max(w.momentum, 13);
   }
@@ -66,12 +67,8 @@ function weightsForContext(context = {}) {
   return w;
 }
 
-function feature(opportunity, key) {
-  return safe(opportunity?.features?.[key]);
-}
-
-function scoreOpportunity(opportunity, context = {}) {
-  const w = weightsForContext(context);
+function scoreOpportunity(opportunity, context = {}, learnedWeights = null) {
+  const w = weightsForContext(context, learnedWeights);
   const f = opportunity?.features || {};
   let score = 0;
   const reasons = [];
@@ -81,7 +78,7 @@ function scoreOpportunity(opportunity, context = {}) {
     if (!value) continue;
     const contribution = value * weight;
     score += contribution;
-    if (Math.abs(contribution) >= 5) reasons.push({ key, contribution });
+    if (Math.abs(contribution) >= 4) reasons.push({ key, contribution: Math.round(contribution * 10) / 10 });
   }
 
   // Relationships are hidden utility: bartender, host, promoter, trusted regular.
@@ -92,17 +89,18 @@ function scoreOpportunity(opportunity, context = {}) {
 
   // Never count romantic upside unless the signal represents mutual/consented interest.
   if (f.romanticUpside && !opportunity?.mutualRomanticSignal) {
-    score -= safe(f.romanticUpside) * Math.abs(w.mutualRomanticUpside);
-    reasons.push({ key: 'unverifiedRomanticSignal', contribution: -safe(f.romanticUpside) * Math.abs(w.mutualRomanticUpside) });
+    const penalty = safe(f.romanticUpside) * Math.abs(w.mutualRomanticUpside);
+    score -= penalty;
+    reasons.push({ key: 'unverifiedRomanticSignal', contribution: -Math.round(penalty * 10) / 10 });
   }
 
   return { opportunity, score: Math.round(score * 10) / 10, reasons };
 }
 
-function rankOpportunities(opportunities = [], context = {}) {
+function rankOpportunities(opportunities = [], context = {}, learnedWeights = null) {
   return opportunities
     .filter(o => o && o.name)
-    .map(o => scoreOpportunity(o, context))
+    .map(o => scoreOpportunity(o, context, learnedWeights))
     .sort((a, b) => b.score - a.score);
 }
 
@@ -141,15 +139,15 @@ function buildDirective(ranked = [], context = {}) {
 
   if (mode === 'PREGAME') {
     headline = 'Don’t leave yet.';
-    instruction = `Keep the pregame moving. ${name} is the best credible opening move right now; I’m still working access, people and the second move.`;
+    instruction = `Keep the pregame moving. ${name} is the best opening move from what I can verify right now; I’m still working access, people and the second move.`;
   }
   if (mode === 'RECOVERY_DOOR') {
     headline = 'Forget that door. I’ve got the next move.';
-    instruction = `${name} is the recovery move. Access certainty and speed are outranking novelty right now.`;
+    instruction = `${name} is the recovery move. I’m prioritizing speed, proximity and lower modeled door friction; unresolved access stays unresolved until it is actually confirmed.`;
   }
   if (mode === 'RECOVERY_ROOM') {
     headline = 'This room is dead. Move.';
-    instruction = `${name} is the pivot. I’m optimizing for energy, proximity and momentum.`;
+    instruction = `${name} is the pivot. I’m prioritizing modeled energy, proximity and momentum while continuing to verify the live details.`;
   }
 
   return { mode, headline, instruction, unresolved, best, backup };
@@ -168,13 +166,14 @@ function learnFromOutcome(currentWeights = {}, outcome = {}) {
   if (outcome.rejectedByPerson) bump('momentum', 0.1); // graceful continuation, never pressure.
   if (outcome.longIdlePeriod) bump('deadTime', -0.5);
   if (outcome.tooManyChoices) bump('decisionBurden', -0.6);
+  if (outcome.founderApproved) bump('founderFit', 0.3);
 
   return next;
 }
 
 function decisionRecord({ context = {}, ranked = [], directive = null, outcome = null } = {}) {
   return {
-    version: 'mikey-fuckit-v0.1',
+    version: 'mikey-fuckit-v0.2',
     createdAt: new Date().toISOString(),
     context,
     candidates: ranked.slice(0, 5).map(x => ({
